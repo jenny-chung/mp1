@@ -1,1 +1,10 @@
-/* Your SCSS here. */
+// -----------------------------------------------------------------------------
+// Manifest only — no declarations of its own, in cascade order.
+// _variables.scss and _mixins.scss are not listed: they emit no CSS and are
+// pulled in by each partial that needs them.
+// -----------------------------------------------------------------------------
+
+@use 'base';
+@use 'navbar';
+@use 'sections';
+@use 'modal';

@@ -1,0 +1,79 @@
+// -----------------------------------------------------------------------------
+// Single source of truth for every design value. Plain SCSS variables only —
+// no CSS custom properties, so there is one system to keep straight rather
+// than two. Values JS needs (the scroll threshold) are constants in JS.
+// -----------------------------------------------------------------------------
+
+// Palette — Japanese minimalist: warm paper ground, soft-black ink, matcha accent
+$paper: #f7f5ef;
+$paper-tint: #efebe0;
+$ink: #2b2620;
+$ink-soft: #6f685c;
+$accent: #5c6f3f;   // deep matcha
+$hairline: #ddd6c6;
+
+// Typography. One ladder for body copy and UI, plus four fluid display steps
+// for the headings that need to shrink with the viewport.
+$font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+$text-2xs: 0.75rem;     // eyebrows, <dt> labels
+$text-xs: 0.8125rem;    // meta lines, colophon, compact nav
+$text-sm: 0.875rem;     // nav links, captions
+$text-md: 0.9375rem;    // buttons, gallery captions, visit details
+$text-base: 1rem;       // body
+$text-lg: 1.0625rem;    // hero lede
+$text-xl: 1.125rem;     // lightbox title
+$text-2xl: 1.25rem;     // wordmark
+$text-3xl: 1.5rem;      // carousel title
+
+$text-display-sm: clamp(1.25rem, 3vw, 2rem);      // visit email
+$text-display-md: clamp(1.5rem, 3.5vw, 2.25rem);  // pull quote
+$text-display-lg: clamp(1.75rem, 4vw, 2.75rem);   // section titles
+$text-display-xl: clamp(2.5rem, 6vw, 4rem);       // hero title
+
+// Spacing scale — multiples of one unit keep the vertical rhythm consistent
+$space-unit: 0.5rem;
+$space-sm: $space-unit * 2;   // 1rem
+$space-md: $space-unit * 4;   // 2rem
+$space-lg: $space-unit * 8;   // 4rem
+$space-xl: $space-unit * 14;  // 7rem
+
+// Shared container (requirement 8, horizontal centring)
+$container-max: 72rem;
+$container-pad: clamp(1rem, 4vw, 3rem);
+
+// Navbar. $nav-border is added to scroll padding so anchored sections clear
+// the sticky header exactly rather than landing a pixel underneath it.
+$nav-h: 6.5rem;
+$nav-h-compact: 4rem;
+$nav-border: 1px;
+$nav-wrap: 880px;
+
+// The page's one transition (requirement 14). The parts are separate so the
+// transition-fast() mixin and the shorthand below read the same two values.
+$transition-duration: 200ms;
+$transition-ease: ease;
+$transition-base: $transition-duration $transition-ease;
+
+// Breakpoints, keyed to the widths of the five graded resolutions: 768x1024,
+// 1024x768, 1280x720, 1366x768, 1920x1080. 'md' and 'lg' are the two where the
+// layout actually changes — above 1280 the container is already capped at
+// $container-max, so 'xl' and wider exist to be named, not to be reached for.
+$breakpoints: (
+    'md': 768px,
+    'lg': 1024px,
+    'xl': 1280px,
+    'xxl': 1366px,
+    'xxxl': 1920px
+);
+
+// -----------------------------------------------------------------------------
+// Icon sources (requirement 15 + 16). URL-encoded SVG strings consumed by the
+// icon() mixin. Hand-drawn geometry, not copied from an icon library.
+// -----------------------------------------------------------------------------
+$svg-arrow-left: "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M15 4 L7 12 L15 20' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
+$svg-arrow-right: "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 4 L17 12 L9 20' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
+$svg-close: "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 5 L19 19 M19 5 L5 19' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E";
+$svg-instagram: "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='3' y='3' width='18' height='18' rx='5' fill='none' stroke='black' stroke-width='2'/%3E%3Ccircle cx='12' cy='12' r='4' fill='none' stroke='black' stroke-width='2'/%3E%3Ccircle cx='17' cy='7' r='1.5' fill='black'/%3E%3C/svg%3E";
+$svg-facebook: "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='3' y='3' width='18' height='18' rx='4' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M14.8 7.6 h-1.6 a2.4 2.4 0 0 0 -2.4 2.4 V20' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M9.6 12.6 H14.4' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E";
+$svg-map: "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21 C12 21 5 14.5 5 10 a7 7 0 0 1 14 0 C19 14.5 12 21 12 21 Z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='12' cy='10' r='2.4' fill='black'/%3E%3C/svg%3E";
