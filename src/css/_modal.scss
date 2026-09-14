@@ -37,6 +37,12 @@
     font-size: v.$text-sm;
 }
 
+.lightbox__description {
+    max-width: 52ch;
+    margin: 0.5rem auto 0;
+    font-size: v.$text-md;
+}
+
 .lightbox__close {
     @include m.flex-center;
 

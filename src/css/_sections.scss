@@ -116,7 +116,10 @@
     overflow: hidden;
 }
 
+// carousel.js sets the transform; this animates the slide between positions.
 .carousel__track {
+    @include m.transition-fast(transform);
+
     display: flex;
 }
 
@@ -125,9 +128,15 @@
     min-width: 0;
 }
 
+// The slides are printed menu cards: portrait pages cropped to the paper, and
+// capped at a width where their small type stays legible. 3:4 is within a few
+// percent of every card, so filling the frame only trims page margin, and one
+// shared shape keeps the track from changing height between slides.
 .carousel__figure img {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    max-width: 44rem;
+    margin-inline: auto;
+    aspect-ratio: 3 / 4;
     object-fit: cover;
 }
 
@@ -151,7 +160,12 @@
     @include m.flex-center;
 
     position: absolute;
-    top: 30%;
+    // Centred on the menu card rather than the card plus its caption. A
+    // percentage margin resolves against the carousel's width; the 3:4 card is
+    // that wide up to 44rem, so its half-height is 66.667% of the width, capped
+    // at 29.333rem. Half the arrow's own height comes back off.
+    top: 0;
+    margin-top: calc(min(66.667%, 29.333rem) - 1.375rem);
     width: 2.75rem;
     height: 2.75rem;
     border: 1px solid v.$hairline;
@@ -223,8 +237,7 @@
 // -----------------------------------------------------------------------------
 .stripe--fixed {
     min-height: 70vh;
-    // Placeholder until the real photo lands; final path is ../assets/story.jpg
-    background-image: url('../assets/image.jpg');
+    background-image: url('../assets/nizu.jpg');
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
@@ -266,12 +279,16 @@
 // -----------------------------------------------------------------------------
 .video {
     max-width: 60rem;
-    margin-inline: auto;
+    // The gap under the title, which #craft used to get from its lede.
+    margin: v.$space-lg auto 0;
 }
 
 .video__player {
     width: 100%;
     aspect-ratio: 16 / 9;
+    // The clip is 1366x720, a touch wider than 16:9; fill the frame rather
+    // than letterbox it.
+    object-fit: cover;
     background-color: v.$ink;
 }
 
