@@ -1,17 +1,15 @@
 @use 'variables' as v;
 @use 'mixins' as m;
 
-// Requirement 2: the navbar is fixed to the top of the viewport for the whole
-// page. Requirement 4: it holds $nav-h at rest and shrinks to $nav-h-compact
-// once scroll.js adds .site-header--compact past 100px of scroll.
-//
-// Fixed rather than sticky, with body reserving the bar's full height, so
-// shrinking it never moves the page underneath. In normal flow the resize
-// shifted every section by 40px: the browser's scroll anchoring answered that
-// shift and flipped the bar back and forth near the threshold, and nav clicks
-// from the top landed 40px under it.
+// Reserve the fixed bar's full height so shrinking it never moves the page.
+// The reserved strip is painted the bar's cream: back at the top, the bar is
+// still growing from its compact height for a few frames, and this is what
+// shows beneath it — cream under cream, instead of a sliver of page green.
 body {
-    padding-top: calc(#{v.$nav-h} + #{v.$nav-border});
+    padding-top: v.$nav-h;
+    background-image: linear-gradient(v.$bar, v.$bar);
+    background-repeat: no-repeat;
+    background-size: 100% v.$nav-h;
 }
 
 .site-header {
@@ -19,9 +17,13 @@ body {
     top: 0;
     left: 0;
     z-index: 100;
-    background-color: rgba(v.$paper, 0.94);
-    border-bottom: v.$nav-border solid v.$hairline;
+    background-color: rgba(v.$bar, 0.94);
+    color: v.$bar-ink;
     backdrop-filter: blur(8px);
+}
+
+.site-header :focus-visible {
+    outline-color: v.$bar-accent;
 }
 
 .site-header__inner {
@@ -36,8 +38,6 @@ body {
     padding-block: v.$space-sm;
 }
 
-// The compact state. Only the three properties that change are restated here,
-// so the at-rest rule above stays the single description of the navbar.
 .site-header--compact .site-header__inner {
     min-height: v.$nav-h-compact;
     padding-block: 0.25rem;
@@ -52,9 +52,9 @@ body {
 .wordmark__name {
     @include m.transition-fast(font-size);
 
+    font-family: v.$font-display;
     font-size: v.$text-2xl;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-weight: 400;
 }
 
 .site-header--compact .wordmark__name {
@@ -72,33 +72,26 @@ body {
 
     padding-block: 0.25rem;
     border-bottom: 2px solid transparent;
-    color: v.$ink-soft;
-    font-size: v.$text-sm;
+    color: v.$bar-ink-soft;
+    font-family: v.$font-display;
+    font-size: v.$text-md;
 }
 
 .site-nav__link:hover {
-    color: v.$ink;
+    color: v.$bar-ink;
 }
 
-// Requirement 3: the position indicator. scroll.js moves .is-active between
-// links as each section crosses under the navbar; the rule on .site-nav__link
-// above transitions the colour and the underline into place.
 .site-nav__link.is-active {
     border-bottom-color: v.$accent;
-    color: v.$ink;
+    color: v.$bar-ink;
 }
 
-// Mobile nav with no JavaScript and no hamburger: the list wraps and the type
-// steps down, which keeps all six links reachable at every required width.
+// Narrow screens keep the wide layout (wordmark left, links right) and only
+// tighten it: smaller links, and a list that wraps right-aligned if it must.
 @media (max-width: v.$nav-wrap) {
-    .site-header__inner {
-        justify-content: center;
-        text-align: center;
-    }
-
     .site-nav__list {
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: flex-end;
     }
 
     .site-nav__link {

@@ -1,11 +1,20 @@
-$paper: #f7f5ef;
-$paper-tint: #efebe0;
-$ink: #2b2620;
-$ink-soft: #6f685c;
-$accent: #5c6f3f;
-$hairline: #ddd6c6;
+$paper: #3a4a47;
+$paper-tint: #33423f;
+$ink: #efeadf;
+$ink-soft: #c4c9bf;
+$accent: #b5c98a;
+$hairline: #56645f;
+$shade: #1f2a28;
+// Warm neutral near-black for darkening photos without tinting them green.
+$scrim: #1b1a17;
+
+$bar: #efeadf;
+$bar-ink: #3a4a47;
+$bar-ink-soft: #4e615f;
+$bar-accent: #5c6f3f;
 
 $font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-display: "Gloock", Georgia, "Times New Roman", serif;
 
 $text-2xs: 0.75rem;
 $text-xs: 0.8125rem;
@@ -32,7 +41,6 @@ $container-pad: clamp(1rem, 4vw, 3rem);
 
 $nav-h: 6.5rem;
 $nav-h-compact: 4rem;
-$nav-border: 1px;
 $nav-wrap: 880px;
 
 $footer-min-h: 14rem;

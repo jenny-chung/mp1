@@ -2,10 +2,10 @@
 @use 'mixins' as m;
 
 .section-title {
+    font-family: v.$font-display;
     font-size: v.$text-display-lg;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 1.1;
-    letter-spacing: -0.02em;
     text-align: center;
 }
 
@@ -50,6 +50,9 @@
 .hero {
     min-height: calc(100vh - #{v.$nav-h});
     overflow: hidden;
+    // The faded photo shows this through it rather than the green page, so the
+    // storefront keeps its own colours.
+    background-color: v.$scrim;
     text-align: center;
 }
 
@@ -59,7 +62,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.18;
+    opacity: 0.35;
 }
 
 .hero__inner {
@@ -75,10 +78,10 @@
 
 .hero__title {
     margin-top: v.$space-sm;
+    font-family: v.$font-display;
     font-size: v.$text-display-xl;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 1.05;
-    letter-spacing: -0.03em;
 }
 
 .hero__lede {
@@ -134,8 +137,9 @@ $arrow-size: 2.75rem;
 }
 
 .carousel__title {
+    font-family: v.$font-display;
     font-size: v.$text-3xl;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .carousel__caption p {
@@ -222,22 +226,22 @@ $arrow-size: 2.75rem;
 .stripe--fixed::before {
     position: absolute;
     inset: 0;
-    background-color: rgba(v.$ink, 0.55);
+    background-color: rgba(v.$scrim, 0.6);
     content: '';
 }
 
 .pull-quote {
     max-width: 46ch;
     margin-inline: auto;
-    color: v.$paper;
+    color: v.$ink;
     text-align: center;
 }
 
 .pull-quote p {
+    font-family: v.$font-display;
     font-size: v.$text-display-md;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.25;
-    letter-spacing: -0.02em;
 }
 
 .pull-quote__source {
@@ -257,7 +261,7 @@ $arrow-size: 2.75rem;
     width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
-    background-color: v.$ink;
+    background-color: v.$shade;
 }
 
 .video__caption {
@@ -326,7 +330,12 @@ main .stripe:last-of-type {
     align-content: center;
     min-height: v.$footer-min-h;
     padding-block: v.$space-lg;
-    border-top: 1px solid v.$hairline;
+    background-color: v.$bar;
+    color: v.$bar-ink;
+}
+
+.site-footer :focus-visible {
+    outline-color: v.$bar-accent;
 }
 
 .site-footer__inner {
@@ -338,7 +347,7 @@ main .stripe:last-of-type {
 }
 
 .site-footer__colophon {
-    color: v.$ink-soft;
+    color: v.$bar-ink-soft;
     font-size: v.$text-xs;
 }
 
@@ -351,9 +360,9 @@ main .stripe:last-of-type {
 .social__link {
     @include m.flex-center;
 
-    color: v.$ink-soft;
+    color: v.$bar-ink-soft;
 }
 
 .social__link:hover {
-    color: v.$ink;
+    color: v.$bar-ink;
 }

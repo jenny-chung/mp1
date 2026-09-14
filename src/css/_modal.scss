@@ -7,10 +7,11 @@
     padding: 0;
     border: 0;
     background-color: v.$paper;
+    color: v.$ink;
 }
 
 .lightbox::backdrop {
-    background-color: rgba(v.$ink, 0.8);
+    background-color: rgba(v.$shade, 0.85);
 }
 
 .lightbox__figure {
@@ -29,8 +30,9 @@
 }
 
 .lightbox__title {
+    font-family: v.$font-display;
     font-size: v.$text-xl;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .lightbox__meta {
