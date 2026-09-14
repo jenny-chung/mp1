@@ -1,0 +1,391 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+// -----------------------------------------------------------------------------
+// Shared section furniture
+// -----------------------------------------------------------------------------
+.section-title {
+    font-size: v.$text-display-lg;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-align: center;
+}
+
+.section-lede {
+    max-width: 46ch;
+    margin: v.$space-sm auto 0;
+    color: v.$ink-soft;
+    text-align: center;
+}
+
+.section-lede + * {
+    margin-top: v.$space-lg;
+}
+
+.button {
+    @include m.transition-fast(background-color, color);
+
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid transparent;
+    font-size: v.$text-md;
+}
+
+.button--primary {
+    background-color: v.$ink;
+    color: v.$paper;
+}
+
+.button--primary:hover {
+    background-color: v.$accent;
+}
+
+.button--ghost {
+    border-color: v.$ink;
+}
+
+.button--ghost:hover {
+    background-color: v.$ink;
+    color: v.$paper;
+}
+
+// -----------------------------------------------------------------------------
+// 1. Hero — vertical centring comes from .stripe--center in _base.scss
+// -----------------------------------------------------------------------------
+.hero {
+    // The sticky navbar sits above the hero in normal flow, so the first screen
+    // is the navbar plus this. Subtracting its at-rest height makes the hero end
+    // exactly at the fold instead of pushing its last 6.5rem below it.
+    min-height: calc(100vh - #{v.$nav-h});
+    overflow: hidden;
+    text-align: center;
+}
+
+.hero__backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.18;
+}
+
+.hero__inner {
+    max-width: 64ch;
+}
+
+.hero__eyebrow {
+    color: v.$ink-soft;
+    font-size: v.$text-2xs;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.hero__title {
+    margin-top: v.$space-sm;
+    font-size: v.$text-display-xl;
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+}
+
+.hero__lede {
+    max-width: 52ch;
+    margin: v.$space-md auto 0;
+    color: v.$ink-soft;
+    font-size: v.$text-lg;
+}
+
+.hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: v.$space-sm;
+    justify-content: center;
+    margin-top: v.$space-md;
+}
+
+// -----------------------------------------------------------------------------
+// 2. Carousel — arrows only, no dot pagination
+// -----------------------------------------------------------------------------
+.carousel {
+    position: relative;
+}
+
+.carousel__viewport {
+    overflow: hidden;
+}
+
+.carousel__track {
+    display: flex;
+}
+
+.carousel__slide {
+    flex: 0 0 100%;
+    min-width: 0;
+}
+
+.carousel__figure img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.carousel__caption {
+    max-width: 60ch;
+    margin: v.$space-md auto 0;
+    text-align: center;
+}
+
+.carousel__title {
+    font-size: v.$text-3xl;
+    font-weight: 600;
+}
+
+.carousel__caption p {
+    margin-top: 0.5rem;
+    color: v.$ink-soft;
+}
+
+.carousel__arrow {
+    @include m.flex-center;
+
+    position: absolute;
+    top: 30%;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid v.$hairline;
+    border-radius: 50%;
+    background-color: rgba(v.$paper, 0.9);
+    color: v.$ink;
+}
+
+.carousel__arrow--prev {
+    left: 0;
+}
+
+.carousel__arrow--next {
+    right: 0;
+}
+
+// -----------------------------------------------------------------------------
+// 3. Gallery — requirement 7 (multi-column) and requirement 14 (the page's
+// single CSS3 animation, on tile hover)
+// -----------------------------------------------------------------------------
+.gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: v.$space-md v.$space-sm;
+}
+
+@include m.respond-to('lg') {
+    .gallery {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.gallery__item {
+    overflow: hidden;
+}
+
+.gallery__tile {
+    display: block;
+    width: 100%;
+    padding: 0;
+    transition: transform v.$transition-base;
+}
+
+.gallery__tile:hover {
+    transform: scale(1.03);
+}
+
+// The placeholder is square, so CSS fixes the framing; real photographs of any
+// aspect ratio drop in without touching this rule.
+.gallery__tile img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+}
+
+.gallery__caption {
+    margin-top: 0.75rem;
+    font-size: v.$text-md;
+}
+
+.gallery__meta {
+    display: block;
+    color: v.$ink-soft;
+    font-size: v.$text-xs;
+}
+
+// -----------------------------------------------------------------------------
+// 4. Field notes — requirement 10, fixed-position background image
+// -----------------------------------------------------------------------------
+.stripe--fixed {
+    min-height: 70vh;
+    // Placeholder until the real photo lands; final path is ../assets/story.jpg
+    background-image: url('../assets/image.jpg');
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.stripe--fixed::before {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(v.$ink, 0.55);
+    content: '';
+}
+
+.pull-quote {
+    // max-width without auto margins would pin the quote to the left edge of
+    // .stripe__inner; requirement 8 wants it centred in the stripe.
+    max-width: 46ch;
+    margin-inline: auto;
+    color: v.$paper;
+    text-align: center;
+}
+
+.pull-quote p {
+    font-size: v.$text-display-md;
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+}
+
+.pull-quote__source {
+    margin-top: v.$space-sm;
+    font-size: v.$text-sm;
+    letter-spacing: 0.06em;
+    opacity: 0.75;
+    text-transform: uppercase;
+}
+
+// -----------------------------------------------------------------------------
+// 5. Film — requirement 12
+// -----------------------------------------------------------------------------
+.video {
+    max-width: 60rem;
+    margin-inline: auto;
+}
+
+.video__player {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: v.$ink;
+}
+
+.video__caption {
+    margin-top: 0.75rem;
+    color: v.$ink-soft;
+    font-size: v.$text-sm;
+    text-align: center;
+}
+
+// -----------------------------------------------------------------------------
+// 6. Visit
+// -----------------------------------------------------------------------------
+.visit__inner {
+    text-align: center;
+}
+
+// Photo above details, one centred column at every width.
+.visit__body {
+    display: grid;
+    gap: v.$space-lg;
+    justify-items: center;
+    margin-top: v.$space-lg;
+}
+
+.visit__figure {
+    width: 100%;
+    max-width: 28rem;
+    margin: 0 auto;
+}
+
+// Portrait, to match the interior photo, so the lanterns and tables are not
+// cropped away.
+.visit__figure img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+}
+
+.visit__details {
+    display: grid;
+    gap: 0.25rem v.$space-sm;
+    max-width: 30rem;
+    margin: 0 auto;
+    font-size: v.$text-md;
+    text-align: left;
+}
+
+@include m.respond-to('md') {
+    .visit__details {
+        grid-template-columns: auto 1fr;
+    }
+}
+
+.visit__details dt {
+    color: v.$ink-soft;
+    font-size: v.$text-2xs;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+// The last stripe has to be tall enough to reach the anchor line under the
+// navbar. #visit plus the footer are shorter than a viewport, so without this
+// the page runs out of scroll before #visit gets there: the nav link scrolls as
+// far as it can and the section stops halfway down the screen, looking like the
+// link did nothing. Its content is centred in the taller box so the extra room
+// reads as deliberate rather than as a gap above the footer.
+main .stripe:last-of-type {
+    display: grid;
+    align-content: center;
+    min-height: calc(100vh - #{v.$nav-h-compact} - #{v.$footer-min-h} + #{v.$tail-slack});
+}
+
+// -----------------------------------------------------------------------------
+// Footer
+// -----------------------------------------------------------------------------
+// The last stripe and the footer together have to fill a viewport, or the page
+// runs out of scroll before #visit reaches the navbar. Carrying part of that
+// height here — as a generously padded footer rather than as empty space in
+// #visit — keeps the section's content close together at tall viewports.
+.site-footer {
+    display: grid;
+    align-content: center;
+    min-height: v.$footer-min-h;
+    padding-block: v.$space-lg;
+    border-top: 1px solid v.$hairline;
+}
+
+.site-footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: v.$space-sm;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.site-footer__colophon {
+    color: v.$ink-soft;
+    font-size: v.$text-xs;
+}
+
+// Requirement 16: social icons, drawn by the same icon() mixin as the arrows.
+.social {
+    display: flex;
+    gap: v.$space-sm;
+    align-items: center;
+}
+
+.social__link {
+    @include m.flex-center;
+
+    color: v.$ink-soft;
+}
+
+.social__link:hover {
+    color: v.$ink;
+}

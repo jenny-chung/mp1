@@ -16,7 +16,6 @@
 
                 <nav class="site-nav" aria-label="Primary">
                     <ul class="site-nav__list">
-                        <li><a class="site-nav__link" data-nav-link href="#home">Home</a></li>
                         <li><a class="site-nav__link" data-nav-link href="#menu">Menu</a></li>
                         <li><a class="site-nav__link" data-nav-link href="#gallery">Gallery</a></li>
                         <li><a class="site-nav__link" data-nav-link href="#story">Story</a></li>
@@ -34,11 +33,9 @@
                 <img class="hero__backdrop" src="assets/image.jpg" alt="" aria-hidden="true">
                 <div class="stripe__inner hero__inner">
                     <p class="hero__eyebrow">Matcha &amp; coffee &middot; Vancouver</p>
-                    <h1 class="hero__title" id="home-title">Coffee, matcha, and baked goods </h1>
+                    <h1 class="hero__title" id="home-title">Discover Something Different</h1>
                     <p class="hero__lede">
-                        A Japanese cafe serving ceremonial-grade matcha whisked to
-                        order and coffee roasted within the week. No queue system, no wifi
-                        password, no rush.
+                        A Japanese-inspired cafe serving matcha whisked to order and coffee roasted within the week.
                     </p>
                     <p class="hero__actions">
                         <a class="button button--primary" href="#menu">See the menu</a>
@@ -116,7 +113,7 @@
             <!-- 3. Gallery grid -->
             <section class="stripe" id="gallery" data-section aria-labelledby="gallery-title">
                 <div class="stripe__inner">
-                    <h2 class="section-title" id="gallery-title">From the Counter</h2>
+                    <h2 class="section-title" id="gallery-title">Gallery</h2>
                     <p class="section-lede">Pastries and drinks that rotate with the season. Choose anything to see it larger.</p>
 
                     <div class="gallery">
@@ -233,17 +230,19 @@
                         Walk in, sit down, stay as long as you like. Large groups are easier
                         before eleven.
                     </p>
-                    <p class="visit__email">
-                        <a href="mailto:hello@nizu.cafe">hello@nizu.cafe</a>
-                    </p>
-                    <dl class="visit__details">
-                        <dt>Address</dt>
-                        <dd>800 West Pender, Vancouver, British Columbia</dd>
-                        <dt>Weekdays</dt>
-                        <dd>8am &ndash; 5pm</dd>
-                        <dt>Weekends</dt>
-                        <dd>10am &ndash; 5pm</dd>
-                    </dl>
+                    <div class="visit__body">
+                        <figure class="visit__figure">
+                            <img src="assets/interior.jpg" alt="Inside Nizu Cafe: pale wood chairs and round steel tables under paper lantern lights, with floor-to-ceiling windows onto West Pender." loading="lazy" decoding="async">
+                        </figure>
+                        <dl class="visit__details">
+                            <dt>Address</dt>
+                            <dd>800 West Pender, Vancouver, British Columbia</dd>
+                            <dt>Weekdays</dt>
+                            <dd>8am &ndash; 5pm</dd>
+                            <dt>Weekends</dt>
+                            <dd>10am &ndash; 5pm</dd>
+                        </dl>
+                    </div>
                 </div>
             </section>
         </main>
@@ -251,9 +250,21 @@
         <footer class="stripe site-footer">
             <div class="stripe__inner site-footer__inner">
                 <p class="site-footer__colophon">
-                    &copy; 2026 Nīzu Cafe. Crafted for your needs.
+                    &copy; 2026 Nīzu Cafe. crafted for your needs.
                 </p>
                 <ul class="social">
+                    <li>
+                        <a class="social__link" href="https://maps.app.goo.gl/aDsX3E3e5BTiEdLa9">
+                            <span class="icon-map" aria-hidden="true"></span>
+                            <span class="visually-hidden">Directions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="social__link" href="mailto:hello@nizu.cafe">
+                            <span class="icon-mail" aria-hidden="true"></span>
+                            <span class="visually-hidden">Email</span>
+                        </a>
+                    </li>
                     <li>
                         <a class="social__link" href="https://www.instagram.com/nizucafe/?hl=en">
                             <span class="icon-instagram" aria-hidden="true"></span>
@@ -261,15 +272,9 @@
                         </a>
                     </li>
                     <li>
-                        <a class="social__link" href="https://facebook.com/">
-                            <span class="icon-facebook" aria-hidden="true"></span>
-                            <span class="visually-hidden">Facebook</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="social__link" href="https://maps.google.com/">
-                            <span class="icon-map" aria-hidden="true"></span>
-                            <span class="visually-hidden">Directions</span>
+                        <a class="social__link" href="https://www.tiktok.com/@nizucafe">
+                            <span class="icon-tiktok" aria-hidden="true"></span>
+                            <span class="visually-hidden">TikTok</span>
                         </a>
                     </li>
                 </ul>

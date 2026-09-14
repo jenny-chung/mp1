@@ -1,0 +1,103 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+// Requirement 2: the navbar sticks to the top of the viewport for the whole
+// page. Requirement 4: it holds $nav-h at rest and shrinks to $nav-h-compact
+// once scroll.js adds .site-header--compact past 100px of scroll.
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: rgba(v.$paper, 0.94);
+    border-bottom: v.$nav-border solid v.$hairline;
+    backdrop-filter: blur(8px);
+}
+
+.site-header__inner {
+    @include m.transition-fast(min-height, padding-block);
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: v.$space-sm;
+    align-items: center;
+    justify-content: space-between;
+    min-height: v.$nav-h;
+    padding-block: v.$space-sm;
+}
+
+// Applied for one frame by scroll.js when a nav link is clicked, so the height
+// change lands instantly and the section offsets the browser reads for the jump
+// are the final ones. Manual scrolling keeps the animated resize.
+.site-header--instant .site-header__inner {
+    transition: none;
+}
+
+// The compact state. Only the three properties that change are restated here,
+// so the at-rest rule above stays the single description of the navbar.
+.site-header--compact .site-header__inner {
+    min-height: v.$nav-h-compact;
+    padding-block: 0.25rem;
+}
+
+.wordmark {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+}
+
+.wordmark__name {
+    @include m.transition-fast(font-size);
+
+    font-size: v.$text-2xl;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.site-header--compact .wordmark__name {
+    font-size: v.$text-xl;
+}
+
+.site-nav__list {
+    display: flex;
+    gap: v.$space-sm;
+    align-items: center;
+}
+
+.site-nav__link {
+    @include m.transition-fast(color, border-bottom-color);
+
+    padding-block: 0.25rem;
+    border-bottom: 2px solid transparent;
+    color: v.$ink-soft;
+    font-size: v.$text-sm;
+}
+
+.site-nav__link:hover {
+    color: v.$ink;
+}
+
+// Requirement 3: the position indicator. scroll.js moves .is-active between
+// links as each section crosses under the navbar; the rule on .site-nav__link
+// above transitions the colour and the underline into place.
+.site-nav__link.is-active {
+    border-bottom-color: v.$accent;
+    color: v.$ink;
+}
+
+// Mobile nav with no JavaScript and no hamburger: the list wraps and the type
+// steps down, which keeps all six links reachable at every required width.
+@media (max-width: v.$nav-wrap) {
+    .site-header__inner {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .site-nav__list {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .site-nav__link {
+        font-size: v.$text-xs;
+    }
+}

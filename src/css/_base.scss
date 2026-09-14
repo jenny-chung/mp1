@@ -8,11 +8,24 @@
 }
 
 html {
-    // Requirement 5: smooth scrolling, declaratively. The extra $nav-border
-    // keeps an anchored section flush with the navbar's bottom edge.
+    // Requirement 5: smooth scrolling, declaratively. The padding reserves the
+    // navbar's height so an anchored section lands below it rather than behind
+    // it, and $nav-border keeps it flush with the bar's bottom edge.
+    //
+    // It reserves the *compact* height, because that is the height the navbar
+    // always has by the time an anchor scroll finishes. The navbar is in normal
+    // flow, so shrinking it lifts everything below by the difference between
+    // the two heights; scroll.js therefore compacts it synchronously on a nav
+    // click, before the browser aims the jump, so the offsets it reads are
+    // already final. One value is then correct from every starting position.
     scroll-behavior: smooth;
     // calc() because rem and px cannot be summed at build time.
     scroll-padding-top: calc(#{v.$nav-h-compact} + #{v.$nav-border});
+    // Scroll anchoring would answer the navbar's height change by shifting
+    // scrollY 40px to compensate, which drops it back under the compact
+    // threshold, re-expands the bar, and loops. The resize is intentional, so
+    // the page should simply reflow under it.
+    overflow-anchor: none;
     -webkit-text-size-adjust: 100%;
 }
 
@@ -118,5 +131,6 @@ main .stripe {
 .icon-arrow-right { @include m.icon(v.$svg-arrow-right, 1.25rem); }
 .icon-close { @include m.icon(v.$svg-close, 1.25rem); }
 .icon-instagram { @include m.icon(v.$svg-instagram, 1.25rem); }
-.icon-facebook { @include m.icon(v.$svg-facebook, 1.25rem); }
+.icon-mail { @include m.icon(v.$svg-mail, 1.25rem); }
 .icon-map { @include m.icon(v.$svg-map, 1.25rem); }
+.icon-tiktok { @include m.icon(v.$svg-tiktok, 1.25rem); }
