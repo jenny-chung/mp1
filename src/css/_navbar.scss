@@ -1,12 +1,23 @@
 @use 'variables' as v;
 @use 'mixins' as m;
 
-// Requirement 2: the navbar sticks to the top of the viewport for the whole
+// Requirement 2: the navbar is fixed to the top of the viewport for the whole
 // page. Requirement 4: it holds $nav-h at rest and shrinks to $nav-h-compact
 // once scroll.js adds .site-header--compact past 100px of scroll.
+//
+// Fixed rather than sticky, with body reserving the bar's full height, so
+// shrinking it never moves the page underneath. In normal flow the resize
+// shifted every section by 40px: the browser's scroll anchoring answered that
+// shift and flipped the bar back and forth near the threshold, and nav clicks
+// from the top landed 40px under it.
+body {
+    padding-top: calc(#{v.$nav-h} + #{v.$nav-border});
+}
+
 .site-header {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
     z-index: 100;
     background-color: rgba(v.$paper, 0.94);
     border-bottom: v.$nav-border solid v.$hairline;
@@ -23,13 +34,6 @@
     justify-content: space-between;
     min-height: v.$nav-h;
     padding-block: v.$space-sm;
-}
-
-// Applied for one frame by scroll.js when a nav link is clicked, so the height
-// change lands instantly and the section offsets the browser reads for the jump
-// are the final ones. Manual scrolling keeps the animated resize.
-.site-header--instant .site-header__inner {
-    transition: none;
 }
 
 // The compact state. Only the three properties that change are restated here,

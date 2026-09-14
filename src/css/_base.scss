@@ -13,19 +13,12 @@ html {
     // it, and $nav-border keeps it flush with the bar's bottom edge.
     //
     // It reserves the *compact* height, because that is the height the navbar
-    // always has by the time an anchor scroll finishes. The navbar is in normal
-    // flow, so shrinking it lifts everything below by the difference between
-    // the two heights; scroll.js therefore compacts it synchronously on a nav
-    // click, before the browser aims the jump, so the offsets it reads are
-    // already final. One value is then correct from every starting position.
+    // has by the time an anchor scroll finishes. The bar is fixed, so its
+    // resize never moves the sections, and one value is correct from every
+    // starting position.
     scroll-behavior: smooth;
     // calc() because rem and px cannot be summed at build time.
     scroll-padding-top: calc(#{v.$nav-h-compact} + #{v.$nav-border});
-    // Scroll anchoring would answer the navbar's height change by shifting
-    // scrollY 40px to compensate, which drops it back under the compact
-    // threshold, re-expands the bar, and loops. The resize is intentional, so
-    // the page should simply reflow under it.
-    overflow-anchor: none;
     -webkit-text-size-adjust: 100%;
 }
 
