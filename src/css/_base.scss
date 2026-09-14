@@ -8,16 +8,7 @@
 }
 
 html {
-    // Requirement 5: smooth scrolling, declaratively. The padding reserves the
-    // navbar's height so an anchored section lands below it rather than behind
-    // it, and $nav-border keeps it flush with the bar's bottom edge.
-    //
-    // It reserves the *compact* height, because that is the height the navbar
-    // has by the time an anchor scroll finishes. The bar is fixed, so its
-    // resize never moves the sections, and one value is correct from every
-    // starting position.
     scroll-behavior: smooth;
-    // calc() because rem and px cannot be summed at build time.
     scroll-padding-top: calc(#{v.$nav-h-compact} + #{v.$nav-border});
     -webkit-text-size-adjust: 100%;
 }
@@ -79,12 +70,6 @@ button {
     outline-offset: 3px;
 }
 
-// -----------------------------------------------------------------------------
-// The one shared stripe pattern. Requirement 1's full-width bands and
-// requirement 8's horizontal centring are defined here once, and every stripe
-// — header, all six sections, footer — uses these same two classes, so
-// centring is never a per-section decision.
-// -----------------------------------------------------------------------------
 .stripe {
     position: relative;
     width: 100%;
@@ -98,8 +83,6 @@ button {
     padding-inline: v.$container-pad;
 }
 
-// #home layers this on for its vertical centring (requirement 8). Grid
-// centring holds the child in the middle however the stripe is resized.
 .stripe--center {
     display: grid;
     place-items: center;
@@ -109,8 +92,6 @@ button {
     background-color: v.$paper-tint;
 }
 
-// Section padding lives on the sections themselves, not the header/footer,
-// which set their own tighter rhythm.
 main .stripe {
     padding-block: v.$space-xl;
 }
@@ -119,11 +100,10 @@ main .stripe {
     @include m.visually-hidden;
 }
 
-// Icon utilities — empty elements in the HTML, shapes supplied entirely by CSS.
-.icon-arrow-left { @include m.icon(v.$svg-arrow-left, 1.25rem); }
-.icon-arrow-right { @include m.icon(v.$svg-arrow-right, 1.25rem); }
-.icon-close { @include m.icon(v.$svg-close, 1.25rem); }
-.icon-instagram { @include m.icon(v.$svg-instagram, 1.25rem); }
-.icon-mail { @include m.icon(v.$svg-mail, 1.25rem); }
-.icon-map { @include m.icon(v.$svg-map, 1.25rem); }
-.icon-tiktok { @include m.icon(v.$svg-tiktok, 1.25rem); }
+.icon-arrow-left { @include m.icon(v.$svg-arrow-left); }
+.icon-arrow-right { @include m.icon(v.$svg-arrow-right); }
+.icon-close { @include m.icon(v.$svg-close); }
+.icon-instagram { @include m.icon(v.$svg-instagram); }
+.icon-mail { @include m.icon(v.$svg-mail); }
+.icon-map { @include m.icon(v.$svg-map); }
+.icon-tiktok { @include m.icon(v.$svg-tiktok); }

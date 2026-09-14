@@ -1,19 +1,20 @@
 @use 'variables' as v;
 @use 'mixins' as m;
 
-// Requirement 11. A native <dialog> is closed by default and gives us
-// Escape-to-close and a backdrop for free, so there is no overlay logic and
-// no open/close animation to author.
 .lightbox {
     width: min(90vw, 60rem);
     max-width: none;
-    padding: v.$space-sm;
+    padding: 0;
     border: 0;
     background-color: v.$paper;
 }
 
 .lightbox::backdrop {
     background-color: rgba(v.$ink, 0.8);
+}
+
+.lightbox__figure {
+    padding: v.$space-sm;
 }
 
 .lightbox__image {
@@ -35,6 +36,10 @@
 .lightbox__meta {
     color: v.$ink-soft;
     font-size: v.$text-sm;
+}
+
+.lightbox__meta::first-letter {
+    text-transform: uppercase;
 }
 
 .lightbox__description {

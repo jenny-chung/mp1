@@ -1,9 +1,6 @@
 @use 'variables' as v;
 @use 'mixins' as m;
 
-// -----------------------------------------------------------------------------
-// Shared section furniture
-// -----------------------------------------------------------------------------
 .section-title {
     font-size: v.$text-display-lg;
     font-weight: 600;
@@ -50,13 +47,7 @@
     color: v.$paper;
 }
 
-// -----------------------------------------------------------------------------
-// 1. Hero — vertical centring comes from .stripe--center in _base.scss
-// -----------------------------------------------------------------------------
 .hero {
-    // The sticky navbar sits above the hero in normal flow, so the first screen
-    // is the navbar plus this. Subtracting its at-rest height makes the hero end
-    // exactly at the fold instead of pushing its last 6.5rem below it.
     min-height: calc(100vh - #{v.$nav-h});
     overflow: hidden;
     text-align: center;
@@ -105,9 +96,6 @@
     margin-top: v.$space-md;
 }
 
-// -----------------------------------------------------------------------------
-// 2. Carousel — arrows only, no dot pagination
-// -----------------------------------------------------------------------------
 .carousel {
     position: relative;
 }
@@ -116,7 +104,6 @@
     overflow: hidden;
 }
 
-// carousel.js sets the transform; this animates the slide between positions.
 .carousel__track {
     @include m.transition-fast(transform);
 
@@ -128,13 +115,13 @@
     min-width: 0;
 }
 
-// The slides are printed menu cards: portrait pages cropped to the paper, and
-// capped at a width where their small type stays legible. 3:4 is within a few
-// percent of every card, so filling the frame only trims page margin, and one
-// shared shape keeps the track from changing height between slides.
+// A 3:4 menu card, sized so the whole card fits under the compact navbar.
+$card-max-h: calc(100vh - #{v.$nav-h-compact} - #{v.$space-md});
+$card-w: min(100%, 44rem, calc(#{$card-max-h} * 3 / 4));
+$arrow-size: 2.75rem;
+
 .carousel__figure img {
-    width: 100%;
-    max-width: 44rem;
+    width: $card-w;
     margin-inline: auto;
     aspect-ratio: 3 / 4;
     object-fit: cover;
@@ -160,14 +147,12 @@
     @include m.flex-center;
 
     position: absolute;
-    // Centred on the menu card rather than the card plus its caption. A
-    // percentage margin resolves against the carousel's width; the 3:4 card is
-    // that wide up to 44rem, so its half-height is 66.667% of the width, capped
-    // at 29.333rem. Half the arrow's own height comes back off.
     top: 0;
-    margin-top: calc(min(66.667%, 29.333rem) - 1.375rem);
-    width: 2.75rem;
-    height: 2.75rem;
+    // Percentage margins resolve against width: half the card's height (4/3 of
+    // its width), less half the arrow.
+    margin-top: calc(#{$card-w} * 2 / 3 - #{$arrow-size} / 2);
+    width: $arrow-size;
+    height: $arrow-size;
     border: 1px solid v.$hairline;
     border-radius: 50%;
     background-color: rgba(v.$paper, 0.9);
@@ -182,10 +167,6 @@
     right: 0;
 }
 
-// -----------------------------------------------------------------------------
-// 3. Gallery — requirement 7 (multi-column) and requirement 14 (the page's
-// single CSS3 animation, on tile hover)
-// -----------------------------------------------------------------------------
 .gallery {
     display: grid;
     grid-template-columns: 1fr;
@@ -206,15 +187,13 @@
     display: block;
     width: 100%;
     padding: 0;
-    transition: transform v.$transition-base;
+    @include m.transition-fast(transform);
 }
 
 .gallery__tile:hover {
     transform: scale(1.03);
 }
 
-// The placeholder is square, so CSS fixes the framing; real photographs of any
-// aspect ratio drop in without touching this rule.
 .gallery__tile img {
     width: 100%;
     aspect-ratio: 3 / 2;
@@ -232,9 +211,6 @@
     font-size: v.$text-xs;
 }
 
-// -----------------------------------------------------------------------------
-// 4. Field notes — requirement 10, fixed-position background image
-// -----------------------------------------------------------------------------
 .stripe--fixed {
     min-height: 70vh;
     background-image: url('../assets/nizu.jpg');
@@ -251,8 +227,6 @@
 }
 
 .pull-quote {
-    // max-width without auto margins would pin the quote to the left edge of
-    // .stripe__inner; requirement 8 wants it centred in the stripe.
     max-width: 46ch;
     margin-inline: auto;
     color: v.$paper;
@@ -274,20 +248,14 @@
     text-transform: uppercase;
 }
 
-// -----------------------------------------------------------------------------
-// 5. Film — requirement 12
-// -----------------------------------------------------------------------------
 .video {
     max-width: 60rem;
-    // The gap under the title, which #craft used to get from its lede.
     margin: v.$space-lg auto 0;
 }
 
 .video__player {
     width: 100%;
     aspect-ratio: 16 / 9;
-    // The clip is 1366x720, a touch wider than 16:9; fill the frame rather
-    // than letterbox it.
     object-fit: cover;
     background-color: v.$ink;
 }
@@ -299,14 +267,6 @@
     text-align: center;
 }
 
-// -----------------------------------------------------------------------------
-// 6. Visit
-// -----------------------------------------------------------------------------
-.visit__inner {
-    text-align: center;
-}
-
-// Photo above details, one centred column at every width.
 .visit__body {
     display: grid;
     gap: v.$space-lg;
@@ -317,29 +277,33 @@
 .visit__figure {
     width: 100%;
     max-width: 28rem;
-    margin: 0 auto;
 }
 
-// Portrait, to match the interior photo, so the lanterns and tables are not
-// cropped away.
 .visit__figure img {
     width: 100%;
     aspect-ratio: 3 / 4;
     object-fit: cover;
 }
 
+// The list shrinks to its own content and is centred as one block under the
+// centred heading, so the text itself — not an empty half-column — sits in the
+// middle of the stripe. Baseline alignment puts the small caps labels on the
+// same line as their larger values.
 .visit__details {
     display: grid;
     gap: 0.25rem v.$space-sm;
-    max-width: 30rem;
-    margin: 0 auto;
+    align-items: baseline;
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
     font-size: v.$text-md;
-    text-align: left;
+    text-align: center;
 }
 
 @include m.respond-to('md') {
     .visit__details {
-        grid-template-columns: auto 1fr;
+        grid-template-columns: auto auto;
+        text-align: left;
     }
 }
 
@@ -350,25 +314,13 @@
     text-transform: uppercase;
 }
 
-// The last stripe has to be tall enough to reach the anchor line under the
-// navbar. #visit plus the footer are shorter than a viewport, so without this
-// the page runs out of scroll before #visit gets there: the nav link scrolls as
-// far as it can and the section stops halfway down the screen, looking like the
-// link did nothing. Its content is centred in the taller box so the extra room
-// reads as deliberate rather than as a gap above the footer.
+// Tall enough, with the footer, for #visit to scroll up to the navbar.
 main .stripe:last-of-type {
     display: grid;
     align-content: center;
     min-height: calc(100vh - #{v.$nav-h-compact} - #{v.$footer-min-h} + #{v.$tail-slack});
 }
 
-// -----------------------------------------------------------------------------
-// Footer
-// -----------------------------------------------------------------------------
-// The last stripe and the footer together have to fill a viewport, or the page
-// runs out of scroll before #visit reaches the navbar. Carrying part of that
-// height here — as a generously padded footer rather than as empty space in
-// #visit — keeps the section's content close together at tall viewports.
 .site-footer {
     display: grid;
     align-content: center;
@@ -390,7 +342,6 @@ main .stripe:last-of-type {
     font-size: v.$text-xs;
 }
 
-// Requirement 16: social icons, drawn by the same icon() mixin as the arrows.
 .social {
     display: flex;
     gap: v.$space-sm;

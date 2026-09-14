@@ -1,13 +1,3 @@
-/**
- * Menu carousel — requirement 6.
- *
- * The slides sit side by side in a flex track; showing slide N is a single
- * translate3d(-N * 100%) on that track, animated by CSS. Prev/next arrows
- * wrap around at either end, which is less code than clamping and disabling
- * them. Slides that are off screen are made inert, so keyboard focus and
- * screen readers only ever reach the one that is visible.
- */
-
 export function init(root) {
     const track = root.querySelector('[data-carousel-track]');
     const slides = Array.from(root.querySelectorAll('[data-carousel-slide]'));

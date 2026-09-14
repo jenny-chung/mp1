@@ -27,7 +27,6 @@
         </header>
 
         <main>
-            <!-- 1. Hero -->
             <section class="stripe stripe--center hero" id="home" data-section aria-labelledby="home-title">
                 <img class="hero__backdrop" src="assets/nizu.jpg" alt="" aria-hidden="true">
                 <div class="stripe__inner hero__inner">
@@ -43,7 +42,6 @@
                 </div>
             </section>
 
-            <!-- 2. Menu carousel -->
             <section class="stripe stripe--tint" id="menu" data-section aria-labelledby="menu-title">
                 <div class="stripe__inner">
                     <h2 class="section-title" id="menu-title">Menu</h2>
@@ -94,7 +92,6 @@
                 </div>
             </section>
 
-            <!-- 3. Gallery grid -->
             <section class="stripe" id="gallery" data-section aria-labelledby="gallery-title">
                 <div class="stripe__inner">
                     <h2 class="section-title" id="gallery-title">Gallery</h2>
@@ -137,7 +134,7 @@
                                 <span class="visually-hidden">View larger &mdash; Tonkatsu Sando</span>
                             </button>
                             <figcaption class="gallery__caption">
-                                Tonkatsu Sando <span class="gallery__meta">pork loin, 72hr cured, fresh panko, yuzu slaw, shokupan</span>
+                                Tonkatsu Sando <span class="gallery__meta">pork loin, yuzu slaw, shokupan</span>
                             </figcaption>
                         </figure>
 
@@ -164,7 +161,6 @@
                 </div>
             </section>
 
-            <!-- 4. Story -->
             <section class="stripe stripe--center stripe--fixed" id="story" data-section aria-labelledby="story-title">
                 <div class="stripe__inner">
                     <h2 class="visually-hidden" id="story-title">Our Story</h2>
@@ -174,21 +170,17 @@
                             built a counter so other people could borrow the habit.
                         </p>
                         <footer class="pull-quote__source">
-                            &mdash; Desmond, <cite>Nīzu</cite>, opened 2025
+                            &mdash; Desmond, <cite>Nīzu</cite>, est. 2025
                         </footer>
                     </blockquote>
                 </div>
             </section>
 
-            <!-- 5. HTML5 video -->
             <section class="stripe" id="craft" data-section aria-labelledby="craft-title">
                 <div class="stripe__inner">
                     <h2 class="section-title" id="craft-title">The Craft</h2>
 
                     <figure class="video">
-                        <!-- Clip: "A Person Stirring Matcha Using Chasen" by Monstera Production,
-                             https://www.pexels.com/video/a-person-stirring-matcha-using-chasen-7141586/
-                             (free under the Pexels License) -->
                         <video class="video__player" controls preload="metadata" poster="assets/video/poster.jpg">
                             <source src="assets/video/matcha-whisk.mp4" type="video/mp4">
                             Your browser does not support the HTML5 video element.
@@ -196,16 +188,15 @@
                         </video>
                         <figcaption class="video__caption">
                             Whisking matcha with a bamboo chasen. Video by
-                            <a href="https://www.pexels.com/video/a-person-stirring-matcha-using-chasen-7141586/">Monstera Production</a>
+                            <a href="https://www.pexels.com/video/whisking-matcha-using-a-chasen-7123752/">Katrin Bolovtsova</a>
                             on Pexels.
                         </figcaption>
                     </figure>
                 </div>
             </section>
 
-            <!-- 6. Visit -->
             <section class="stripe stripe--tint" id="visit" data-section aria-labelledby="visit-title">
-                <div class="stripe__inner visit__inner">
+                <div class="stripe__inner">
                     <h2 class="section-title" id="visit-title">Visit</h2>
                     <p class="section-lede">
                         Walk in, sit down, stay as long as you like. Large groups are easier
@@ -262,12 +253,11 @@
             </div>
         </footer>
 
-        <!-- Lightbox: filled from js/data.js by js/lightbox.js when a gallery tile is chosen -->
         <dialog class="lightbox" data-lightbox aria-label="Image viewer">
             <figure class="lightbox__figure">
-                <img class="lightbox__image" data-lightbox-image src="assets/image.jpg" alt="">
+                <img class="lightbox__image" data-lightbox-image alt="">
                 <figcaption class="lightbox__caption">
-                    <h2 class="lightbox__title" data-lightbox-caption></h2>
+                    <h2 class="lightbox__title" data-lightbox-title></h2>
                     <p class="lightbox__meta" data-lightbox-meta></p>
                     <p class="lightbox__description" data-lightbox-description></p>
                 </figcaption>

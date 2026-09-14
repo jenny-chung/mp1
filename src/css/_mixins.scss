@@ -1,6 +1,5 @@
 @use 'variables' as v;
 
-// Requirement 13: the $breakpoints map consumed by an @each-driven mixin.
 @mixin respond-to($name) {
     @each $bp, $width in v.$breakpoints {
         @if $bp == $name {
@@ -23,10 +22,7 @@
     transition-timing-function: v.$transition-ease;
 }
 
-// Requirement 15: icons delivered through CSS. The SVG becomes a mask, and
-// background-color: currentColor paints it, so one shape recolours with text
-// and scales with font-size. No <svg> markup in the HTML.
-@mixin icon($svg, $size: 1em) {
+@mixin icon($svg, $size: 1.25rem) {
     display: inline-block;
     width: $size;
     height: $size;
