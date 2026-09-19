@@ -33,7 +33,7 @@ body {
 
     display: flex;
     flex-wrap: wrap;
-    gap: v.$space-sm;
+    gap: v.$space-sm v.$space-lg;
     align-items: center;
     justify-content: space-between;
     min-height: v.$nav-h;
@@ -55,7 +55,7 @@ body {
     @include m.transition-fast(font-size);
 
     font-family: v.$font-display;
-    font-size: v.$text-2xl;
+    font-size: v.$text-3xl;
     font-weight: 400;
 }
 
@@ -70,14 +70,14 @@ body {
 }
 
 .site-nav__link {
-    @include m.transition-fast(color);
+    @include m.transition-fast(color, font-size);
 
     position: relative;
     padding-block: 0.25rem;
     border-bottom: $indicator-h solid transparent;
     color: v.$bar-ink-soft;
     font-family: v.$font-display;
-    font-size: v.$text-md;
+    font-size: v.$text-xl;
 }
 
 .site-nav__link::after {
@@ -96,6 +96,11 @@ body {
     transform: scaleX(1);
 }
 
+// Requirement 4: the link text shrinks with the bar, not just the wordmark.
+.site-header--compact .site-nav__link {
+    font-size: v.$text-sm;
+}
+
 .site-nav__link:hover,
 .site-nav__link.is-active {
     color: v.$bar-ink;
@@ -110,6 +115,10 @@ body {
     }
 
     .site-nav__link {
+        font-size: v.$text-lg;
+    }
+
+    .site-header--compact .site-nav__link {
         font-size: v.$text-xs;
     }
 }
