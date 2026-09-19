@@ -176,6 +176,12 @@ $arrow-inset: calc(50% - #{$card-w} / 2 - #{$arrow-room});
     gap: v.$space-md v.$space-sm;
 }
 
+@include m.respond-to('md') {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @include m.respond-to('lg') {
     .gallery {
         grid-template-columns: repeat(3, 1fr);
