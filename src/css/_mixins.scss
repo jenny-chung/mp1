@@ -37,6 +37,13 @@
     -webkit-mask-size: contain;
 }
 
+@mixin label {
+    color: v.$ink-soft;
+    font-size: v.$text-2xs;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
 @mixin visually-hidden {
     position: absolute;
     width: 1px;
