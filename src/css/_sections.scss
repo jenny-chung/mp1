@@ -376,10 +376,16 @@ main .stripe:last-of-type {
 
 .site-footer__inner {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: v.$space-sm;
     align-items: center;
-    justify-content: space-between;
+    text-align: center;
+}
+
+.site-footer__heading {
+    font-family: v.$font-display;
+    font-size: v.$text-2xl;
+    font-weight: 400;
 }
 
 .site-footer__colophon {
@@ -395,10 +401,16 @@ main .stripe:last-of-type {
 
 .social__link {
     @include m.flex-center;
+    @include m.transition-fast(color, background-color);
 
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid currentColor;
+    border-radius: 50%;
     color: v.$bar-ink-soft;
 }
 
 .social__link:hover {
+    background-color: v.$accent;
     color: v.$bar-ink;
 }
