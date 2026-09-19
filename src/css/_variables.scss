@@ -5,7 +5,6 @@ $ink-soft: #c4c9bf;
 $accent: #b5c98a;
 $hairline: #56645f;
 $shade: #1f2a28;
-// Warm neutral near-black for darkening photos without tinting them green.
 $scrim: #1b1a17;
 
 $bar: #efeadf;
@@ -58,10 +57,7 @@ $breakpoints: (
     'xxxl': 1920px
 );
 
-// Instagram, map, mail and TikTok icons: path data from
-// Font Awesome Free 6.7.2 by Fonticons, Inc. (https://fontawesome.com),
-// CC BY 4.0 (https://fontawesome.com/license/free); paths extracted and
-// re-encoded as data URIs, no Font Awesome dependency.
+// Icon paths from Font Awesome Free 6.7.2, CC BY 4.0 (https://fontawesome.com/license/free).
 $svg-arrow-left: "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M15 4 L7 12 L15 20' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
 $svg-arrow-right: "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 4 L17 12 L9 20' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
 $svg-close: "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 5 L19 19 M19 5 L5 19' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E";

@@ -3,10 +3,7 @@
 
 $indicator-h: 3px;
 
-// Reserve the fixed bar's full height so shrinking it never moves the page.
-// The reserved strip is painted the bar's cream: back at the top, the bar is
-// still growing from its compact height for a few frames, and this is what
-// shows beneath it — cream under cream, instead of a sliver of page green.
+// Reserve the full bar height, painted cream, so shrinking the bar never moves the page.
 body {
     padding-top: v.$nav-h;
     background-image: linear-gradient(v.$bar, v.$bar);
@@ -106,8 +103,6 @@ body {
     color: v.$bar-ink;
 }
 
-// Narrow screens keep the wide layout (wordmark left, links right) and only
-// tighten it: smaller links, and a list that wraps right-aligned if it must.
 @media (max-width: v.$nav-wrap) {
     .site-nav__list {
         flex-wrap: wrap;
