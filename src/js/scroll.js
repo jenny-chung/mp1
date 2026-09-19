@@ -1,7 +1,6 @@
 const COMPACT_AT = 100;
 const RESIZE_DEBOUNCE = 150;
 const TOLERANCE = 2;
-const ACTIVATE_AT = 1 / 3;
 
 export function init(root = document) {
     const header = root.querySelector('[data-nav]');
@@ -20,11 +19,11 @@ export function init(root = document) {
     let ticking = false;
     let resizeTimer = 0;
 
-    // Scroll position where each section's top crosses a line a third of the way below the navbar.
+    // Scroll position where each section's top reaches the navbar, so a section is highlighted
+    // only once it is the one being read rather than while it is still below the fold.
     function measure() {
-        const barLine = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop);
         const activationLine =
-            barLine + (window.innerHeight - barLine) * ACTIVATE_AT + TOLERANCE;
+            parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) + TOLERANCE;
         offsets = sections.map(
             (section) => section.getBoundingClientRect().top + window.scrollY - activationLine
         );
