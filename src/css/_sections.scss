@@ -120,9 +120,10 @@
 }
 
 // A 3:4 menu card, sized so the whole card fits under the compact navbar.
-$card-max-h: calc(100vh - #{v.$nav-h-compact} - #{v.$space-md});
-$card-w: min(100%, 44rem, calc(#{$card-max-h} * 3 / 4));
 $arrow-size: 2.75rem;
+$arrow-room: calc(#{$arrow-size} + #{v.$space-sm});
+$card-max-h: calc(100vh - #{v.$nav-h-compact} - #{v.$space-md});
+$card-w: min(calc(100% - 2 * #{$arrow-room}), 44rem, calc(#{$card-max-h} * 3 / 4));
 
 .carousel__figure img {
     width: $card-w;
@@ -164,12 +165,14 @@ $arrow-size: 2.75rem;
     color: v.$ink;
 }
 
+$arrow-inset: calc(50% - #{$card-w} / 2 - #{$arrow-room});
+
 .carousel__arrow--prev {
-    left: 0;
+    left: $arrow-inset;
 }
 
 .carousel__arrow--next {
-    right: 0;
+    right: $arrow-inset;
 }
 
 .gallery {

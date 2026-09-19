@@ -18,6 +18,7 @@ export const descriptions = {
         'First-harvest Yabukita, a single cultivar from Shizuoka, roasted to a medium ' +
         'hojicha and poured with steamed milk, finished with creative latte art.',
     g06:
-        'Baked hot so the top caramelises dark while the centre stays creamy, then ' +
-        'served with a quenelle of vanilla bean cream and a drizzle of caramel.',
+        'A vanilla Basque cheesecake, baked hot so the top caramelises dark while the ' +
+        'centre stays creamy, then served with a quenelle of vanilla bean cream and a ' +
+        'drizzle of caramel.',
 };
