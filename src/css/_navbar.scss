@@ -1,6 +1,8 @@
 @use 'variables' as v;
 @use 'mixins' as m;
 
+$indicator-h: 3px;
+
 // Reserve the fixed bar's full height so shrinking it never moves the page.
 // The reserved strip is painted the bar's cream: back at the top, the bar is
 // still growing from its compact height for a few frames, and this is what
@@ -68,21 +70,34 @@ body {
 }
 
 .site-nav__link {
-    @include m.transition-fast(color, border-bottom-color);
+    @include m.transition-fast(color);
 
+    position: relative;
     padding-block: 0.25rem;
-    border-bottom: 2px solid transparent;
+    border-bottom: $indicator-h solid transparent;
     color: v.$bar-ink-soft;
     font-family: v.$font-display;
     font-size: v.$text-md;
 }
 
-.site-nav__link:hover {
-    color: v.$bar-ink;
+.site-nav__link::after {
+    position: absolute;
+    right: 0;
+    bottom: -$indicator-h;
+    left: 0;
+    height: $indicator-h;
+    background-color: v.$nav-highlight;
+    content: '';
+    transform: scaleX(0);
+    transition: transform 300ms ease-out;
 }
 
+.site-nav__link.is-active::after {
+    transform: scaleX(1);
+}
+
+.site-nav__link:hover,
 .site-nav__link.is-active {
-    border-bottom-color: v.$accent;
     color: v.$bar-ink;
 }
 

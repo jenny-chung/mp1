@@ -1,6 +1,7 @@
 const COMPACT_AT = 100;
 const RESIZE_DEBOUNCE = 150;
 const TOLERANCE = 2;
+const ACTIVATE_AT = 1 / 3;
 
 export function init(root = document) {
     const header = root.querySelector('[data-nav]');
@@ -19,13 +20,13 @@ export function init(root = document) {
     let ticking = false;
     let resizeTimer = 0;
 
-    // Scroll position at which each section reaches the anchor line under the navbar.
+    // Scroll position where each section's top crosses a line a third of the way below the navbar.
     function measure() {
-        const anchorLine =
-            parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) +
-            TOLERANCE;
+        const barLine = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop);
+        const activationLine =
+            barLine + (window.innerHeight - barLine) * ACTIVATE_AT + TOLERANCE;
         offsets = sections.map(
-            (section) => section.getBoundingClientRect().top + window.scrollY - anchorLine
+            (section) => section.getBoundingClientRect().top + window.scrollY - activationLine
         );
         update();
     }
@@ -45,7 +46,7 @@ export function init(root = document) {
         let i = 0;
         while (i < offsets.length && offsets[i] <= y) i++;
 
-        // The last section may never reach the bar, so it wins at the bottom.
+        // The last section may never reach the activation line, so it wins at the bottom.
         const next = atBottom ? links[links.length - 1] : linkFor[Math.max(0, i - 1)];
         if (next !== activeLink) {
             activeLink?.classList.remove('is-active');
