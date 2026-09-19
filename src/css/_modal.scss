@@ -1,6 +1,9 @@
 @use 'variables' as v;
 @use 'mixins' as m;
 
+$close-size: 2.25rem;
+$close-inset: v.$space-unit;
+
 .lightbox {
     width: min(90vw, 60rem);
     max-width: none;
@@ -14,8 +17,29 @@
     background-color: rgba(v.$shade, 0.85);
 }
 
+// lightbox.js adds .is-closing and closes the dialog once the fade-out ends.
+.lightbox[open],
+.lightbox[open]::backdrop {
+    animation: lightbox-fade-in 250ms ease-out;
+}
+
+.lightbox.is-closing,
+.lightbox.is-closing::backdrop {
+    animation: lightbox-fade-out 200ms ease-in forwards;
+}
+
+@keyframes lightbox-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes lightbox-fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
 .lightbox__figure {
-    padding: v.$space-sm;
+    padding: ($close-inset * 2 + $close-size) v.$space-sm v.$space-sm;
 }
 
 .lightbox__image {
@@ -52,13 +76,18 @@
 
 .lightbox__close {
     @include m.flex-center;
+    @include m.transition-fast(background-color, color);
 
     position: absolute;
-    top: v.$space-sm;
-    right: v.$space-sm;
-    width: 2.25rem;
-    height: 2.25rem;
-    border: 1px solid v.$hairline;
+    top: $close-inset;
+    right: $close-inset;
+    width: $close-size;
+    height: $close-size;
     background-color: v.$paper;
     color: v.$ink;
+}
+
+.lightbox__close:hover {
+    background-color: v.$accent;
+    color: v.$paper;
 }

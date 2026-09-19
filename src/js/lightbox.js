@@ -23,10 +23,28 @@ export function init(gallery, dialog) {
         dialog.showModal();
     });
 
-    dialog.querySelector('[data-lightbox-close]').addEventListener('click', () => dialog.close());
+    function closeViewer() {
+        if (dialog.open) dialog.classList.add('is-closing');
+    }
+
+    dialog.addEventListener('animationend', (event) => {
+        if (event.animationName !== 'lightbox-fade-out' || event.pseudoElement) return;
+        dialog.close();
+    });
+
+    dialog.addEventListener('close', () => dialog.classList.remove('is-closing'));
+
+    // Esc fires cancel; hold the dialog open so it can fade out.
+    dialog.addEventListener('cancel', (event) => {
+        if (!event.cancelable) return;
+        event.preventDefault();
+        closeViewer();
+    });
+
+    dialog.querySelector('[data-lightbox-close]').addEventListener('click', closeViewer);
 
     // The dialog has no padding, so a click on the dialog itself is on the backdrop.
     dialog.addEventListener('click', (event) => {
-        if (event.target === dialog) dialog.close();
+        if (event.target === dialog) closeViewer();
     });
 }
