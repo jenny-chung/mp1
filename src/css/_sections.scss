@@ -220,7 +220,6 @@ $arrow-inset: calc(50% - #{$card-w} / 2 - #{$arrow-room});
 }
 
 .stripe--fixed {
-    min-height: 70vh;
     background-image: url('../assets/nizu.jpg');
     background-position: center;
     background-size: cover;
@@ -246,6 +245,16 @@ $arrow-inset: calc(50% - #{$card-w} / 2 - #{$arrow-room});
     font-size: v.$text-display-md;
     font-weight: 400;
     line-height: 1.25;
+}
+
+@include m.respond-to('xxxl') {
+    .pull-quote {
+        max-width: 46rem;
+    }
+
+    .pull-quote p {
+        font-size: 3rem;
+    }
 }
 
 .pull-quote__source {
