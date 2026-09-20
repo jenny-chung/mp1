@@ -150,7 +150,6 @@ $card-w: min(calc(100% - 2 * #{$arrow-room}), 44rem, calc(#{$card-max-h} * 3 / 4
 
     position: absolute;
     top: 0;
-    // Percentage margins resolve against width: half the card's height, less half the arrow.
     margin-top: calc(#{$card-w} * 2 / 3 - #{$arrow-size} / 2);
     width: $arrow-size;
     height: $arrow-size;
@@ -237,7 +236,7 @@ $arrow-inset: calc(50% - #{$card-w} / 2 - #{$arrow-room});
 }
 
 .pull-quote {
-    max-width: 46ch;
+    max-width: clamp(36rem, 29.333rem + 13.889vw, 46rem);
     margin-inline: auto;
     color: v.$ink;
     text-align: center;
@@ -245,18 +244,14 @@ $arrow-inset: calc(50% - #{$card-w} / 2 - #{$arrow-room});
 
 .pull-quote p {
     font-family: v.$font-display;
-    font-size: v.$text-display-md;
+    font-size: clamp(2.625rem, 1.911rem + 1.116vw, 3.25rem);
     font-weight: 400;
     line-height: 1.25;
 }
 
-@include m.respond-to('xxxl') {
-    .pull-quote {
-        max-width: 46rem;
-    }
-
+@media (max-width: 1023px) {
     .pull-quote p {
-        font-size: 3rem;
+        font-size: clamp(2.625rem, 5.133rem - 3.922vw, 3.25rem);
     }
 }
 
@@ -362,7 +357,6 @@ $arrow-inset: calc(50% - #{$card-w} / 2 - #{$arrow-room});
     @include m.label;
 }
 
-// Tall enough, with the footer, for #visit to scroll up to the navbar.
 main .stripe:last-of-type {
     display: grid;
     align-content: center;

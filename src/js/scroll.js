@@ -1,6 +1,7 @@
 const COMPACT_AT = 100;
 const RESIZE_DEBOUNCE = 150;
 const TOLERANCE = 2;
+const SCROLL_SETTLE = 2000;
 
 export function init(root = document) {
     const header = root.querySelector('[data-nav]');
@@ -18,15 +19,36 @@ export function init(root = document) {
     let activeLink = null;
     let ticking = false;
     let resizeTimer = 0;
+    let lockedLink = null;
+    let lockTimer = 0;
 
-    // Scroll position where each section's top reaches the navbar, so a section is highlighted
-    // only once it is the one being read rather than while it is still below the fold.
     function measure() {
         const activationLine =
             parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) + TOLERANCE;
         offsets = sections.map(
             (section) => section.getBoundingClientRect().top + window.scrollY - activationLine
         );
+        update();
+    }
+
+    function setActive(next) {
+        if (next === activeLink) return;
+        activeLink?.classList.remove('is-active');
+        next?.classList.add('is-active');
+        activeLink = next;
+    }
+
+    function lockTo(link) {
+        lockedLink = link;
+        setActive(link);
+        clearTimeout(lockTimer);
+        lockTimer = setTimeout(unlock, SCROLL_SETTLE);
+    }
+
+    function unlock() {
+        if (!lockedLink) return;
+        lockedLink = null;
+        clearTimeout(lockTimer);
         update();
     }
 
@@ -45,13 +67,14 @@ export function init(root = document) {
         let i = 0;
         while (i < offsets.length && offsets[i] <= y) i++;
 
-        // The last section may never reach the activation line, so it wins at the bottom.
         const next = atBottom ? links[links.length - 1] : linkFor[Math.max(0, i - 1)];
-        if (next !== activeLink) {
-            activeLink?.classList.remove('is-active');
-            next?.classList.add('is-active');
-            activeLink = next;
+
+        if (lockedLink) {
+            if (next === lockedLink) unlock();
+            return;
         }
+
+        setActive(next);
     }
 
     window.addEventListener(
@@ -63,6 +86,12 @@ export function init(root = document) {
         },
         { passive: true }
     );
+    links.forEach((link) => link.addEventListener('click', () => lockTo(link)));
+
+    ['wheel', 'touchstart', 'keydown'].forEach((type) =>
+        window.addEventListener(type, unlock, { passive: true })
+    );
+
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(measure, RESIZE_DEBOUNCE);
