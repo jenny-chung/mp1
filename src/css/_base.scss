@@ -34,6 +34,14 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
+// Everything is sized in rem, so growing the root from 16px at 1366 to 18px at 1920
+// scales type, spacing and the container together on large screens.
+@include m.respond-to('xxl') {
+    html {
+        font-size: clamp(100%, 0.6919rem + 0.361vw, 112.5%);
+    }
+}
+
 // 1ms rather than none, so animationend still fires for the lightbox.
 @media (prefers-reduced-motion: reduce) {
     html {

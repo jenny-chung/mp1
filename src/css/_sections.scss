@@ -76,7 +76,8 @@
 }
 
 .hero__title {
-    margin-top: v.$space-sm;
+    max-width: 6em;
+    margin: v.$space-sm auto 0;
     font-family: v.$font-display;
     font-size: v.$text-display-xl;
     font-weight: 400;
@@ -88,6 +89,12 @@
     margin: v.$space-md auto 0;
     color: v.$ink-soft;
     font-size: v.$text-lg;
+}
+
+@include m.respond-to('xxxl') {
+    .hero__title {
+        font-size: 4.5rem;
+    }
 }
 
 .hero__actions {
@@ -236,23 +243,20 @@ $arrow-inset: calc(50% - #{$card-w} / 2 - #{$arrow-room});
 }
 
 .pull-quote {
-    max-width: clamp(36rem, 29.333rem + 13.889vw, 46rem);
+    max-width: clamp(38rem, 50vw, 60rem);
     margin-inline: auto;
     color: v.$ink;
     text-align: center;
 }
 
 .pull-quote p {
+    max-width: 24ch;
+    margin-inline: auto;
     font-family: v.$font-display;
-    font-size: clamp(2.625rem, 1.911rem + 1.116vw, 3.25rem);
+    font-size: v.$text-display-quote;
     font-weight: 400;
     line-height: 1.25;
-}
-
-@media (max-width: 1023px) {
-    .pull-quote p {
-        font-size: clamp(2.625rem, 5.133rem - 3.922vw, 3.25rem);
-    }
+    text-wrap: balance;
 }
 
 .pull-quote__source {
